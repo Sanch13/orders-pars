@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    {% block title %}<title>Main page</title>{% endblock title %}
+    <meta charset="UTF-8">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    {% block css %}
+    {% endblock css %}
+</head>
+<body>
+<div class="container-xxl">
+    <div>
+        <p>Заказы</p>
+    </div>
+    <div class="table-container">
+        <table>
+            <tr>
+                <th> 1</th>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <th> 1</th>
+                <th> 2</th>
+                <th> 3</th>
+                <th> 4</th>
+                <th> 5</th>
+            </tr>
+            <tr>
+                <td>Ячейка 1</td>
+                <td>Ячейка 2</td>
+                <td>Ячейка 3</td>
+                <td>Ячейка 4</td>
+                <td>Ячейка 5</td>
+            </tr>
+        </table>
+    </div>
+    <div class="table-container">
+        <table>
+            <tr>
+                <th> 1</th>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <th> 1</th>
+                <th> 2</th>
+                <th> 3</th>
+                <th> 4</th>
+                <th> 5</th>
+            </tr>
+            <tr>
+                <td>Ячейка 1</td>
+                <td>Ячейка 2</td>
+                <td>Ячейка 3</td>
+                <td>Ячейка 4</td>
+                <td>Ячейка 5</td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

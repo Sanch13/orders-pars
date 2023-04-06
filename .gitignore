@@ -1,1 +1,16 @@
+# C extensions
+*.so
+
+### Django ###
+*.log
+*.pot
+*.pyc
 .idea
+venv
+*pycache*
+*.env
+/env
+*.sqlite3
+*.pyc
+__pycache__
+orders/.env
