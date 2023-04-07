@@ -11,6 +11,8 @@ class Settings(BaseSettings):
     PASSWORD: str
     HOST: str
     PORT: str
+    CELERY_BROKER_URL: str
+    CELERY_RESULT_BACKEND: str
 
     class Config:
         env_file = '.env'

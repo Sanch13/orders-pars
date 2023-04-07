@@ -11,52 +11,52 @@
 <body>
 <div class="container-xxl">
     <div>
-        <p>Заказы</p>
+        <h2 style="text-align: center">Заказы</h2>
     </div>
     <div class="table-container">
         <table>
             <tr>
-                <th> 1</th>
+                <th>GOSZAKUPKI  Количество предложений :<i style="font-size: 1.2em; color: #db0a10">
+                    {{ total_today_gos }}</i></th>
             </tr>
         </table>
         <table>
-            <tr>
-                <th> 1</th>
-                <th> 2</th>
-                <th> 3</th>
-                <th> 4</th>
-                <th> 5</th>
-            </tr>
-            <tr>
-                <td>Ячейка 1</td>
-                <td>Ячейка 2</td>
-                <td>Ячейка 3</td>
-                <td>Ячейка 4</td>
-                <td>Ячейка 5</td>
-            </tr>
+            <th>Наименование</th>
+            <th>Дата окончания</th>
+            <th>Сумма заказа</th>
+            <th>Ссылка на заказ</th>
+            {% for obj in orders_gos %}
+                <tr>
+                    <td>{{ obj.name }}</td>
+                    <td>{{ obj.deadline }}</td>
+                    <td style="width: 140px">{{ obj.price }}</td>
+                    <td style="width: 90px"><a href="{{ obj.link }}" target="_blank">к просмотру</a>
+                    </td>
+                </tr>
+            {% endfor %}
         </table>
     </div>
     <div class="table-container">
         <table>
             <tr>
-                <th> 1</th>
+                <th> ICETRADE  Количество предложений : <i style="font-size: 1.2em; color:
+                #db0a10">{{ total_today_ice }}</i></th>
             </tr>
         </table>
         <table>
-            <tr>
-                <th> 1</th>
-                <th> 2</th>
-                <th> 3</th>
-                <th> 4</th>
-                <th> 5</th>
-            </tr>
-            <tr>
-                <td>Ячейка 1</td>
-                <td>Ячейка 2</td>
-                <td>Ячейка 3</td>
-                <td>Ячейка 4</td>
-                <td>Ячейка 5</td>
-            </tr>
+            <th>Наименование</th>
+            <th>Дата окончания</th>
+            <th>Сумма заказа</th>
+            <th>Ссылка на заказ</th>
+            {% for obj in orders_ice %}
+                <tr>
+                    <td>{{ obj.name }}</td>
+                    <td>{{ obj.deadline }}</td>
+                    <td style="width: 140px">{{ obj.price }}</td>
+                    <td style="width: 90px"><a href="{{ obj.link }}" target="_blank">к просмотру</a>
+                    </td>
+                </tr>
+            {% endfor %}
         </table>
     </div>
 </div>
