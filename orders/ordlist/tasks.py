@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, timedelta
 import requests
 from bs4 import BeautifulSoup
 import re
@@ -22,8 +22,8 @@ def get_data_from_icetrade():
         soup = BeautifulSoup(src, "lxml")
         rows = soup.select("#auctions-list tr")[1:]
         for row in rows:
-            if float(row.select_one('td:nth-child(5)').text.strip()[:-3].replace(' ', '')) < 500:
-                continue
+            # if float(row.select_one('td:nth-child(5)').text.strip()[:-3].replace(' ', '')) < 500:
+            #     continue
             if not re.search(pattern_positive, row.a.text):
                 continue
             if re.search(pattern_negative, row.a.text):
@@ -50,8 +50,8 @@ def get_data_from_goszakupki():
         rows = soup.select("tbody tr")
         for row in rows:
             if row.select_one('td:nth-child(4)').text == "Подача предложений":
-                if float(row.select_one('td:nth-child(6)').text[:-3].replace(' ', '')) < 500:
-                    continue
+                # if float(row.select_one('td:nth-child(6)').text[:-3].replace(' ', '')) < 500:
+                #     continue
                 if not re.search(pattern_positive, row.a.text):
                     continue
                 if re.search(pattern_negative, row.a.text):
@@ -65,3 +65,15 @@ def get_data_from_goszakupki():
                                               deadline=row.select_one('td:nth-child(5)').text,
                                               price=row.select_one('td:nth-child(6)').text,
                                               date=date.today())
+
+
+@shared_task()
+def delete_records_ice():
+    logger.info("Delete form DataIcetrade records")
+    DataIcetrade.objects.filter(date__lt=date.today()-timedelta(days=1)).delete()
+
+
+@shared_task()
+def delete_records_gos():
+    logger.info("Delete form DataGoszakupki records")
+    DataGoszakupki.objects.filter(date__lt=date.today()-timedelta(days=1)).delete()

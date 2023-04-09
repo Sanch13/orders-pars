@@ -117,11 +117,19 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_BEAT_SCHEDULE = {
     'icetrade': {
         'task': 'ordlist.tasks.get_data_from_icetrade',
-        'schedule': timedelta(minutes=1),
+        'schedule': timedelta(minutes=45),
     },
     'goszakupki': {
         'task': 'ordlist.tasks.get_data_from_goszakupki',
-        'schedule': timedelta(minutes=1),
+        'schedule': timedelta(minutes=45),
+    },
+    'delete_records_ice': {
+        'task': 'ordlist.tasks.delete_records_ice',
+        'schedule': timedelta(days=1),
+    },
+    'delete_records_gos': {
+        'task': 'ordlist.tasks.delete_records_gos',
+        'schedule': timedelta(days=1),
     },
 }
 

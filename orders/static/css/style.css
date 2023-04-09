@@ -24,3 +24,25 @@ td {
     background-color: #c1d6cc;
     /*width: 40%;*/
 }
+
+#timer {
+    background-color: black;
+    /*color: white;*/
+    color: #3adb40;
+    font-size: 2em;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    width: min-content;
+    position: relative;
+    top: 30px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#minutes,
+#seconds {
+    padding: 5px;
+    background-color: #222;
+    border-radius: 3px;
+}

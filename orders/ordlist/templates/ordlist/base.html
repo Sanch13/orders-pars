@@ -4,19 +4,25 @@
 <head>
     {% block title %}<title>Main page</title>{% endblock title %}
     <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&amp;subset=cyrillic"
+          rel="stylesheet">
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
     {% block css %}
     {% endblock css %}
 </head>
 <body>
+<div id="timer">
+    <span id="minutes">00</span>:<span id="seconds">00</span>
+</div>
 <div class="container-xxl">
-    <div>
-        <h2 style="text-align: center">Заказы</h2>
-    </div>
+    <p></p>
+    <div><h1 style="font-size: 1.3em; text-align: center;
+">До следующего обновления позиции</h1></div>
+
     <div class="table-container">
         <table>
             <tr>
-                <th>GOSZAKUPKI  Количество предложений :<i style="font-size: 1.2em; color: #db0a10">
+                <th>GOSZAKUPKI Количество предложений :<i style="font-size: 1.2em; color: #db0a10">
                     {{ total_today_gos }}</i></th>
             </tr>
         </table>
@@ -39,7 +45,7 @@
     <div class="table-container">
         <table>
             <tr>
-                <th> ICETRADE  Количество предложений : <i style="font-size: 1.2em; color:
+                <th> ICETRADE Количество предложений : <i style="font-size: 1.2em; color:
                 #db0a10">{{ total_today_ice }}</i></th>
             </tr>
         </table>
@@ -60,5 +66,31 @@
         </table>
     </div>
 </div>
+<script>
+    function startTimer(duration, display) {
+        let timer = duration, minutes, seconds;
+        setInterval(function () {
+            minutes = parseInt(timer / 60, 10)
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.querySelector('#minutes').textContent = minutes;
+            display.querySelector('#seconds').textContent = seconds;
+
+            if (--timer < 0) {
+                timer = duration;
+                location.reload();
+            }
+        }, 1000);
+    }
+
+    window.onload = function () {
+        const Minutes = 60 * 50,
+            display = document.querySelector('#timer');
+        startTimer(Minutes, display);
+    };
+</script>
 </body>
 </html>
