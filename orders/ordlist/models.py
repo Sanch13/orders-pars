@@ -6,7 +6,8 @@ class DataIcetrade(models.Model):
     name = models.CharField(max_length=250)
     link = models.CharField(max_length=250)
     deadline = models.CharField(max_length=250)
-    price = models.CharField(max_length=50)
+    price = models.FloatField()
+    abbreviation = models.CharField(max_length=3)
 
 
 class DataGoszakupki(models.Model):
@@ -14,4 +15,5 @@ class DataGoszakupki(models.Model):
     name = models.CharField(max_length=250)
     link = models.CharField(max_length=250)
     deadline = models.CharField(max_length=250)
-    price = models.CharField(max_length=50)
+    price = models.FloatField()
+    abbreviation = models.CharField(max_length=3)

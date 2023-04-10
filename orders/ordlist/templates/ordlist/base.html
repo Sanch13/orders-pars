@@ -4,8 +4,6 @@
 <head>
     {% block title %}<title>Main page</title>{% endblock title %}
     <meta charset="UTF-8">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&amp;subset=cyrillic"
-          rel="stylesheet">
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
     {% block css %}
     {% endblock css %}
@@ -17,8 +15,16 @@
 <div class="container-xxl">
     <p></p>
     <div><h1 style="font-size: 1.3em; text-align: center;
-">До следующего обновления позиции</h1></div>
-
+">До следующего обновления позиций</h1></div>
+    <div style="font-size: 1.3em; text-align: center;">
+        <form action="{% url 'index' %}">
+            <label>Цена</label>
+            {{ form.min_price }}
+            {{ form.max_price }}
+            <button class="btn btn-success" type="submit">Отфильтровать</button>
+        </form>
+    </div>
+    <p></p>
     <div class="table-container">
         <table>
             <tr>
@@ -35,7 +41,7 @@
                 <tr>
                     <td>{{ obj.name }}</td>
                     <td>{{ obj.deadline }}</td>
-                    <td style="width: 140px">{{ obj.price }}</td>
+                    <td style="width: 140px">{{ obj.price }} {{ obj.abbreviation }}</td>
                     <td style="width: 90px"><a href="{{ obj.link }}" target="_blank">к просмотру</a>
                     </td>
                 </tr>
@@ -58,7 +64,7 @@
                 <tr>
                     <td>{{ obj.name }}</td>
                     <td>{{ obj.deadline }}</td>
-                    <td style="width: 140px">{{ obj.price }}</td>
+                    <td style="width: 140px">{{ obj.price }} {{ obj.abbreviation }}</td>
                     <td style="width: 90px"><a href="{{ obj.link }}" target="_blank">к просмотру</a>
                     </td>
                 </tr>
