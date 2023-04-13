@@ -6,7 +6,7 @@ import logging
 
 from celery import shared_task
 
-from utils import pattern_positive, pattern_negative, url_goszakupki, url_icetrade, headers
+from ordlist.utils import pattern_positive, pattern_negative, url_goszakupki, url_icetrade, headers
 from ordlist.models import DataIcetrade, DataGoszakupki
 
 
