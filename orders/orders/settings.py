@@ -1,7 +1,6 @@
 import os
 from datetime import timedelta
 from pathlib import Path
-
 from secret_settings import settings
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -94,6 +93,14 @@ LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'UTC'
 
+USE_THOUSAND_SEPARATOR = True
+
+THOUSAND_SEPARATOR = ' '
+
+USE_L10N = True
+
+DECIMAL_SEPARATOR = '.'
+
 USE_I18N = True
 
 USE_TZ = True
@@ -117,11 +124,11 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_BEAT_SCHEDULE = {
     'icetrade': {
         'task': 'ordlist.tasks.get_data_from_icetrade',
-        'schedule': timedelta(minutes=45),
+        'schedule': timedelta(minutes=5),
     },
     'goszakupki': {
         'task': 'ordlist.tasks.get_data_from_goszakupki',
-        'schedule': timedelta(minutes=45),
+        'schedule': timedelta(minutes=5),
     },
     'delete_records_ice': {
         'task': 'ordlist.tasks.delete_records_ice',

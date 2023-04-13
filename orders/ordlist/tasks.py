@@ -6,7 +6,7 @@ import logging
 
 from celery import shared_task
 
-from utils import pattern_positive, pattern_negative, url_goszakupki, url_icetrade, headers
+from ordlist.utils import pattern_positive, pattern_negative, url_goszakupki, url_icetrade, headers
 from ordlist.models import DataIcetrade, DataGoszakupki
 
 
@@ -22,8 +22,6 @@ def get_data_from_icetrade():
         soup = BeautifulSoup(src, "lxml")
         rows = soup.select("#auctions-list tr")[1:]
         for row in rows:
-            # if float(row.select_one('td:nth-child(5)').text.strip()[:-3].replace(' ', '')) < 500:
-            #     continue
             if not re.search(pattern_positive, row.a.text):
                 continue
             if re.search(pattern_negative, row.a.text):
@@ -34,7 +32,8 @@ def get_data_from_icetrade():
             DataIcetrade.objects.create(name=row.a.text.strip(),
                                         link=row.a.get("href"),
                                         deadline=row.select_one('td:nth-child(6)').text,
-                                        price=row.select_one('td:nth-child(5)').text.strip(),
+                                        price=float(row.select_one('td:nth-child(5)').text.strip()[:-3].replace(' ', '')),
+                                        abbreviation=row.select_one('td:nth-child(5)').text.strip()[-3:],
                                         date=date.today())
 
 
@@ -50,8 +49,6 @@ def get_data_from_goszakupki():
         rows = soup.select("tbody tr")
         for row in rows:
             if row.select_one('td:nth-child(4)').text == "Подача предложений":
-                # if float(row.select_one('td:nth-child(6)').text[:-3].replace(' ', '')) < 500:
-                #     continue
                 if not re.search(pattern_positive, row.a.text):
                     continue
                 if re.search(pattern_negative, row.a.text):
@@ -63,7 +60,8 @@ def get_data_from_goszakupki():
                 DataGoszakupki.objects.create(name=row.a.text.strip(),
                                               link="https://goszakupki.by" + row.a.get('href'),
                                               deadline=row.select_one('td:nth-child(5)').text,
-                                              price=row.select_one('td:nth-child(6)').text,
+                                              price=float(row.select_one('td:nth-child(6)').text.strip()[:-3].replace(' ', '')),
+                                              abbreviation=row.select_one('td:nth-child(6)').text.strip()[-3:],
                                               date=date.today())
 
 
